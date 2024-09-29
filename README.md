@@ -45,6 +45,8 @@ INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 ```
 
+Acessando a rota `/docs` será mostrado todas as rotas configuradas para a aplicação.
+
 # Tecnologias
 
 - Python
@@ -62,7 +64,7 @@ INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 
         Utilizado para criar e executar o servidor da aplicação.
 
-    - [Pydantic](https://docs.pydantic.dev/latest/) -> Biblioteca de validação de Dados
+    - [Sqlitemodel](https://pypi.org/project/sqlitemodel/) -> Wrapper para o banco de dados sqlite3.
 
-        Utilizado na construção das classes do diretório `models`.
+        Utilizado na construção das classes do diretório `models` e permitindo a persistência dos dados no arquivo `swapi_database.db` (definido em `main.py`)
     

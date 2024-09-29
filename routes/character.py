@@ -1,10 +1,9 @@
 from fastapi import HTTPException;
-from typing import List;
 from routes import router;
 from models.character import Character
 import requests;
 
-@router.get("/characters/", response_model=List[Character])
+@router.get("/characters/")
 def list_all_characters():
     url = 'https://swapi.dev/api/people/';
     characters = [];
@@ -18,8 +17,7 @@ def list_all_characters():
 
     return characters;
 
-@router.get("/characters/{character_id}", response_model=Character)
-def get_character_data(character_id: int):
+def get_character(character_id: int):
     if character_id < 1 or character_id > 82:
         raise HTTPException(status_code=400, detail="ID deve ser um número entre 1 e 82.");
     
@@ -31,8 +29,9 @@ def get_character_data(character_id: int):
     
     response.raise_for_status();
     character_data = response.json();
-    
-    return Character(
+
+    character = Character(
+        id=character_id,
         name=character_data['name'],
         height=character_data['height'],
         mass=character_data['mass'],
@@ -41,4 +40,27 @@ def get_character_data(character_id: int):
         eye_color=character_data['eye_color'],
         birth_year=character_data['birth_year'],
         gender=character_data['gender']
-    );
+    )
+
+    return character;
+
+
+@router.get("/characters/{character_id}")
+def get_character_data(character_id: int):
+    return get_character(character_id);
+
+@router.get("/characters/{character_id}/save")
+def save_character_data(character_id: int):
+    character = get_character(character_id)
+    character.createTable() # Cria a tabela se não existir
+    character.save()
+    
+    return f'Personagem \'{character.name}\' salvo no banco de dados.';
+
+@router.get("/characters/{character_id}/delete")
+def save_character_data(character_id: int):
+    character = get_character(character_id)
+    character.createTable() # Cria a tabela se não existir
+    character.delete()
+    
+    return f'Personagem \'{character.name}\' removido do banco de dados.';
