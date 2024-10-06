@@ -47,12 +47,11 @@ def get_species(species_id: int):
 
 @router.get("/species/{species_id}")
 def get_species_data(species_id: int):
-    return get_species(species_id);
+    return get_species(species_id).getData();
 
 @router.get("/species/{species_id}/save")
 def save_species_data(species_id: int):
     species = get_species(species_id);
-    species.createTable();  # Cria a tabela se não existir
     species.save();
     
     return f'Espécie \'{species.name}\' salva no banco de dados.';
@@ -60,7 +59,6 @@ def save_species_data(species_id: int):
 @router.get("/species/{species_id}/delete")
 def delete_species_data(species_id: int):
     species = get_species(species_id);
-    species.createTable();  # Cria a tabela se não existir
     species.delete();
     
     return f'Espécie \'{species.name}\' removida do banco de dados.';

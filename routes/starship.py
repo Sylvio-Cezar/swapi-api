@@ -48,12 +48,11 @@ def get_starship(starship_id: int):
 
 @router.get("/starships/{starship_id}")
 def get_starship_data(starship_id: int):
-    return get_starship(starship_id);
+    return get_starship(starship_id).getData();
 
 @router.get("/starships/{starship_id}/save")
 def save_starship_data(starship_id: int):
     starship = get_starship(starship_id);
-    starship.createTable();  # Cria a tabela se não existir
     starship.save();
     
     return f'Nave \'{starship.name}\' salva no banco de dados.';
@@ -61,7 +60,6 @@ def save_starship_data(starship_id: int):
 @router.get("/starships/{starship_id}/delete")
 def delete_starship_data(starship_id: int):
     starship = get_starship(starship_id);
-    starship.createTable();  # Cria a tabela se não existir
     starship.delete();
     
     return f'Nave \'{starship.name}\' removida do banco de dados.';

@@ -48,12 +48,11 @@ def get_vehicle(vehicle_id: int):
 
 @router.get("/vehicles/{vehicle_id}")
 def get_vehicle_data(vehicle_id: int):
-    return get_vehicle(vehicle_id);
+    return get_vehicle(vehicle_id).getData();
 
 @router.get("/vehicles/{vehicle_id}/save")
 def save_vehicle_data(vehicle_id: int):
     vehicle = get_vehicle(vehicle_id);
-    vehicle.createTable();  # Cria a tabela se não existir
     vehicle.save();
     
     return f'Veículo \'{vehicle.name}\' salvo no banco de dados.';
@@ -61,7 +60,6 @@ def save_vehicle_data(vehicle_id: int):
 @router.get("/vehicles/{vehicle_id}/delete")
 def delete_vehicle_data(vehicle_id: int):
     vehicle = get_vehicle(vehicle_id);
-    vehicle.createTable();  # Cria a tabela se não existir
     vehicle.delete();
     
     return f'Veículo \'{vehicle.name}\' removido do banco de dados.';

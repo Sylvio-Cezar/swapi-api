@@ -4,7 +4,7 @@ class Vehicle(Model):
 
     # Modelo para construção da tabela no sqlite
     def __init__(self, **kwargs):
-        self.id = kwargs['id'];
+        self.api_id = kwargs['id'];
         self.name = kwargs['name'];
         self.model = kwargs['model'];
         self.manufacturer = kwargs['manufacturer'];
@@ -16,7 +16,8 @@ class Vehicle(Model):
         self.cargo_capacity = kwargs['cargo_capacity'];
         self.vehicle_class = kwargs['vehicle_class'];
 
-        Model.__init__(self, self.id);
+        Model.__init__(self, self.api_id);
+        self.createTable();
         self.getModel();
 
     # Especifica nome da tabela no banco de dados
@@ -26,6 +27,7 @@ class Vehicle(Model):
     # Define as colunas da tabela
     def columns(self):
         return [
+            {'name': 'api_id', 'type': 'INTEGER PRIMARY KEY'},
             {'name': 'name', 'type': 'TEXT'},
             {'name': 'model', 'type': 'TEXT'},
             {'name': 'manufacturer', 'type': 'TEXT'},
@@ -37,3 +39,17 @@ class Vehicle(Model):
             {'name': 'cargo_capacity', 'type': 'TEXT'},
             {'name': 'vehicle_class', 'type': 'TEXT'}
         ];
+
+    def getData(self):
+        return {
+            "name": self.name,
+            "model": self.model,
+            "manufacturer": self.manufacturer,
+            "cost_in_credits": self.cost_in_credits,
+            "length": self.length,
+            "max_atmosphering_speed": self.max_atmosphering_speed,
+            "crew": self.crew,
+            "passengers": self.passengers,
+            "cargo_capacity": self.cargo_capacity,
+            "vehicle_class": self.vehicle_class
+        }

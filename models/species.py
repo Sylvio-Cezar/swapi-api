@@ -4,7 +4,7 @@ class Species(Model):
 
     # Modelo para construção da tabela no sqlite
     def __init__(self, **kwargs):
-        self.id = kwargs['id'];
+        self.api_id = kwargs['id'];
         self.name = kwargs['name'];
         self.classification = kwargs['classification'];
         self.designation = kwargs['designation'];
@@ -15,7 +15,8 @@ class Species(Model):
         self.average_lifespan = kwargs['average_lifespan'];
         self.language = kwargs['language'];
 
-        Model.__init__(self, self.id);
+        Model.__init__(self, self.api_id);
+        self.createTable();
         self.getModel();
 
     # Especifica o nome da tabela no banco de dados
@@ -25,6 +26,7 @@ class Species(Model):
     # Define as colunas da tabela
     def columns(self):
         return [
+            {'name': 'api_id', 'type': 'INTEGER PRIMARY KEY'},
             {'name': 'name', 'type': 'TEXT'},
             {'name': 'classification', 'type': 'TEXT'},
             {'name': 'designation', 'type': 'TEXT'},
@@ -35,3 +37,16 @@ class Species(Model):
             {'name': 'average_lifespan', 'type': 'TEXT'},
             {'name': 'language', 'type': 'TEXT'}
         ];
+
+    def getData(self):
+        return {
+            "name": self.name,
+            "classification": self.classification,
+            "designation": self.designation,
+            "average_height": self.average_height,
+            "skin_colors": self.skin_colors,
+            "hair_colors": self.hair_colors,
+            "eye_colors": self.eye_colors,
+            "average_lifespan": self.average_lifespan,
+            "language": self.language
+        }

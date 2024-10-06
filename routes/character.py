@@ -47,20 +47,18 @@ def get_character(character_id: int):
 
 @router.get("/characters/{character_id}")
 def get_character_data(character_id: int):
-    return get_character(character_id);
+    return get_character(character_id).getData();
 
 @router.get("/characters/{character_id}/save")
 def save_character_data(character_id: int):
     character = get_character(character_id);
-    character.createTable(); # Cria a tabela se não existir
     character.save();
-    
+
     return f'Personagem \'{character.name}\' salvo no banco de dados.';
 
 @router.get("/characters/{character_id}/delete")
 def save_character_data(character_id: int):
     character = get_character(character_id);
-    character.createTable(); # Cria a tabela se não existir
     character.delete();
     
     return f'Personagem \'{character.name}\' removido do banco de dados.';
