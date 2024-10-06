@@ -13,6 +13,7 @@ class Species(Model):
         self.hair_colors = kwargs['hair_colors'];
         self.eye_colors = kwargs['eye_colors'];
         self.average_lifespan = kwargs['average_lifespan'];
+        self.homeworld = kwargs['homeworld'];
         self.language = kwargs['language'];
 
         Model.__init__(self, self.api_id);
@@ -35,6 +36,7 @@ class Species(Model):
             {'name': 'hair_colors', 'type': 'TEXT'},
             {'name': 'eye_colors', 'type': 'TEXT'},
             {'name': 'average_lifespan', 'type': 'TEXT'},
+            {'name': 'homeworld', 'type': 'TEXT'},
             {'name': 'language', 'type': 'TEXT'}
         ];
 
@@ -48,5 +50,6 @@ class Species(Model):
             "hair_colors": self.hair_colors,
             "eye_colors": self.eye_colors,
             "average_lifespan": self.average_lifespan,
+            "homeworld": self.homeworld,
             "language": self.language
         }

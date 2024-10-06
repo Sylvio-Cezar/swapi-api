@@ -40,6 +40,7 @@ def get_species(species_id: int):
         hair_colors=species_data['hair_colors'],
         eye_colors=species_data['eye_colors'],
         average_lifespan=species_data['average_lifespan'],
+        homeworld=species_data['homeworld'],
         language=species_data['language']
     );
 

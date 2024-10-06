@@ -1,5 +1,5 @@
 from fastapi import FastAPI;
-from routes import status, character, film, starship, vehicle, species, planet
+from routes import status, character, film, starship, vehicle, species, planet, favorites
 from sqlitemodel import Database
 import uvicorn;
 
@@ -16,6 +16,7 @@ app.include_router(starship.router);
 app.include_router(vehicle.router);
 app.include_router(species.router);
 app.include_router(planet.router);
+app.include_router(favorites.router);
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000);
