@@ -44,12 +44,11 @@ def get_film(film_id: int):
 
 @router.get("/films/{film_id}")
 def get_film_data(film_id: int):
-    return get_film(film_id);
+    return get_film(film_id).getData();
 
 @router.get("/films/{film_id}/save")
 def save_film_data(film_id: int):
     film = get_film(film_id);
-    film.createTable();  # Cria a tabela se não existir
     film.save();
     
     return f'Filme \'{film.title}\' salvo no banco de dados.';
@@ -57,7 +56,6 @@ def save_film_data(film_id: int):
 @router.get("/films/{film_id}/delete")
 def delete_film_data(film_id: int):
     film = get_film(film_id);
-    film.createTable();  # Cria a tabela se não existir
     film.delete();
     
     return f'Filme \'{film.title}\' removido do banco de dados.';

@@ -47,12 +47,11 @@ def get_planet(planet_id: int):
 
 @router.get("/planets/{planet_id}")
 def get_planet_data(planet_id: int):
-    return get_planet(planet_id);
+    return get_planet(planet_id).getData();
 
 @router.get("/planets/{planet_id}/save")
 def save_planet_data(planet_id: int):
     planet = get_planet(planet_id);
-    planet.createTable();  # Cria a tabela se não existir
     planet.save();
     
     return f'Planeta \'{planet.name}\' salvo no banco de dados.';
@@ -60,7 +59,6 @@ def save_planet_data(planet_id: int):
 @router.get("/planets/{planet_id}/delete")
 def delete_planet_data(planet_id: int):
     planet = get_planet(planet_id);
-    planet.createTable();  # Cria a tabela se não existir
     planet.delete();
     
     return f'Planeta \'{planet.name}\' removido do banco de dados.';
