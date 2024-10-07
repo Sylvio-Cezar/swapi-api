@@ -30,6 +30,22 @@ def save_favorite_data():
             "period": 6
         }
     };
+    favorite2_definitions = {
+        "id": 2,
+        "character": character.get_character(4),
+        "film": film.get_film(2),
+        "starship": starship.get_starship(9),
+        "vehicle": vehicle.get_vehicle(8),
+        "specie": species.get_species(6),
+        "planet": planet.get_planet(1),
+        "student": {
+            "name": "Sylvio Cézar",
+            "ra": 98021585,
+            "course": "Sistemas de Informação",
+            "university": "Univás - Universidade do Vale do Sapucaí",
+            "period": 6
+        }
+    };
     
     favorite1 = Favorite(
         id=favorite1_definitions['id'],
@@ -52,6 +68,28 @@ def save_favorite_data():
         student_period=favorite1_definitions['student']['period']
     );
 
+    favorite2 = Favorite(
+        id=favorite2_definitions['id'],
+        character_name=favorite2_definitions['character'].name,
+        character_birth_year=favorite2_definitions['character'].birth_year,
+        film_title=favorite2_definitions['film'].title,
+        film_episode_id=favorite2_definitions['film'].episode_id,
+        starship_name=favorite2_definitions['starship'].name,
+        starship_model=favorite2_definitions['starship'].model,
+        vehicle_name=favorite2_definitions['vehicle'].name,
+        vehicle_model=favorite2_definitions['vehicle'].model,
+        specie_homeworld=favorite2_definitions['specie'].homeworld,
+        specie_language=favorite2_definitions['specie'].language,
+        planet_name=favorite2_definitions['planet'].name,
+        planet_population=favorite2_definitions['planet'].population,
+        student_name=favorite2_definitions['student']['name'],
+        student_ra=favorite2_definitions['student']['ra'],
+        student_course=favorite2_definitions['student']['course'],
+        student_university=favorite2_definitions['student']['university'],
+        student_period=favorite2_definitions['student']['period']
+    );
+
     favorite1.save();
+    favorite2.save();
     
-    return f'Favoritos de \'{favorite1.student_name}\' e \'{"A DEFINIR"}\' salvo no banco de dados.';
+    return f'Favoritos de \'{favorite1.student_name}\' e \'{favorite2.student_name}\' salvo no banco de dados.';
